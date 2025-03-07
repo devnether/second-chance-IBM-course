@@ -23,6 +23,8 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ error: "Email id already exists" });
     }
 
+    console.log(collection);
+
     const salt = await bcryptjs.genSalt(10);
     const hash = await bcryptjs.hash(req.body.password, salt);
     const email = req.body.email;
@@ -98,6 +100,7 @@ router.put("/update", async (req, res) => {
         .status(400)
         .json({ error: "Email not found in the request headers" });
     }
+    
     const db = await connectToDatabase();
     const collection = db.collection("users");
     const user = await collection.findOne({ email: email });
