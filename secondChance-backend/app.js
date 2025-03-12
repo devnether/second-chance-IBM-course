@@ -8,7 +8,7 @@ const connectToDatabase = require("./models/db");
 const { loadData } = require("./util/import-mongo/index");
 const secondChanceItemsRoutes = require("./routes/secondChanceItemsRoutes");
 const searchRoutes = require("./routes/searchRoutes");
-const authRoutes = require("./routes/authRouter");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 app.use("*", cors());
@@ -29,9 +29,9 @@ const logger = require("./logger");
 app.use(pinoHttp({ logger }));
 
 
-app.use("/api/secondchance/items", secondChanceItemsRoutes);
-app.use("/api/secondchance/search", searchRoutes);
-app.use("/api/secondChance/auth", authRoutes);
+app.use("/api/items", secondChanceItemsRoutes);
+app.use("/api/search", searchRoutes);
+app.use("/api/auth", authRoutes);
 
 // Global Error Handler
 app.use((err, req, res, next) => {

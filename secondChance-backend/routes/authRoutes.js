@@ -15,15 +15,16 @@ const JWT_SECRET = process.env.JWT_SECRET;
 router.post("/register", async (req, res) => {
   try {
     const db = await connectToDatabase();
+    console.log(db);
     const collection = db.collection("users");
+
+    console.log(collection);
     const existingEmail = await collection.findOne({ email: req.body.email });
 
     if (existingEmail) {
       logger.error("Email id already exists");
       return res.status(400).json({ error: "Email id already exists" });
     }
-
-    console.log(collection);
 
     const salt = await bcryptjs.genSalt(10);
     const hash = await bcryptjs.hash(req.body.password, salt);
@@ -64,17 +65,21 @@ router.post("/login", async (req, res) => {
         logger.error("Wrong credentials");
         return res.status(404).json({ error: "Wrong credentials" });
       }
-      const username = user.username;
+      const userName = user.firstName;
+
       const email = user.email;
+
       const payload = {
         user: {
-          id: newUser.insertedId,
+          id: user.insertedId,
         },
       };
 
+      console.log(userName, email, payload);
+
       const authtoken = jwt.sign(payload, JWT_SECRET);
       logger.info("User logged in successfully");
-      return res.status(200).json({ authtoken, username, email });
+      return res.status(200).json({ authtoken, userName, email });
     } else {
       logger.error("User not found");
       return res.status(404).json({ error: "User not found" });
@@ -100,7 +105,7 @@ router.put("/update", async (req, res) => {
         .status(400)
         .json({ error: "Email not found in the request headers" });
     }
-    
+
     const db = await connectToDatabase();
     const collection = db.collection("users");
     const user = await collection.findOne({ email: email });
