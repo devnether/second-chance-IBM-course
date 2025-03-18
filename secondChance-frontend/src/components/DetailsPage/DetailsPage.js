@@ -25,7 +25,7 @@ function DetailsPage() {
         // get the gift to be rendered on the details page
         const fetchItem = async () => {
             try {
-                const response = await fetch(`${urlConfig.backendUrl}/api/secondchance/items/${itemId}`);
+                const response = await fetch(`${urlConfig.backendUrl}/api/items/${itemId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

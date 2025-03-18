@@ -13,7 +13,7 @@ function MainPage() {
         // fetch all items
         const fetchItems = async () => {
             try {
-                let url = `${urlConfig.backendUrl}/api/secondchance/items`
+                let url = `${urlConfig.backendUrl}/api/items`
                 const response = await fetch(url);
                 if (!response.ok) {
                     //something went wrong
