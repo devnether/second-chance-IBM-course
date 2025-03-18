@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
-// eslint-disable
-const axios = require("axios");
+
+
 const logger = require("./logger");
 const expressPino = require("express-pino-logger")({ logger });
 const natural = require("natural");
