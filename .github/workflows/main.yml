@@ -22,7 +22,7 @@ jobs:
         run: |
           # This command finds all JavaScript files recursively and runs JSHint on them
           npm init -y
-          npm install eslint eslint-config-standard eslint@^8.0.1 eslint-plugin-import@^2.25.2 eslint-plugin-n@^16.0.0  eslint-plugin-promise@^6.0.0
+          npm install eslint eslint-config-standard eslint@^8.0.1 eslint-plugin-import@^2.25.2 eslint-plugin-n@^16.0.0  eslint-plugin-promise@^6.0.0 --fix
           find ./secondChance-backend -name app.js -exec ./node_modules/.bin/eslint -c .eslintrc.js {} +
           find ./secondChance-backend -name auth.js -exec ./node_modules/.bin/eslint -c .eslintrc.js {} +
           find ./secondChance-backend -name secondChanceItemsRoutes.js -exec ./node_modules/.bin/eslint -c .eslintrc.js {} +
